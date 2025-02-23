@@ -17,6 +17,6 @@ FROM openjdk:17-slim
 ARG DOCKER_VERSION
 WORKDIR /app
 # copying the jar file to the new container
-COPY --from=build /app/target/my-app-$INPUT_DOCKER_VERSION.jar .
+COPY --from=build /app/target/my-app-$DOCKER_VERSION.jar .
 # Set the command to run the application
 CMD ["java", "-jar", "my-app-$DOCKER_VERSION.jar"]
