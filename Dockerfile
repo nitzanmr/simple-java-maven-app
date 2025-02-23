@@ -1,18 +1,21 @@
 # Use an official Maven image as the base image
 FROM maven:3.9.2 AS build
-# Set the working directory in the container
+
+ARG DOCKER_VERSION
+
 WORKDIR /app
-# Copy the pom.xml and the project files to the container
+# copy the project files to container
 COPY pom.xml .
 COPY src ./src
-# Build the application using Maven
-RUN mvn versions:set -DnewVersion=$INPUT_DOCKER_VERSION
+# setting the version to be given version
+RUN mvn versions:set -DnewVersion=$DOCKER_VERSION
+# packaging the maven package
 RUN mvn clean package -Dskiptests
+
 # Use an official OpenJDK image as the base image
 FROM openjdk:17-slim
-# Set the working directory in the container
 WORKDIR /app
-# Copy the built JAR file from the previous stage to the container
+# copying the jar file to the new container
 COPY --from=build /app/target/my-app-$INPUT_DOCKER_VERSION-SNAPSHOT.jar .
 # Set the command to run the application
-CMD ["java", "-jar", "my-app-$INPUT_VERSION-SNAPSHOT.jar"]
+CMD ["java", "-jar", "my-app-$DOCKER_VERSION-SNAPSHOT.jar"]
