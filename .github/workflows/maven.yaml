@@ -7,6 +7,8 @@ on:
 jobs:
   versioning:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.calculate-version.outputs.version-string }}  # Exposing the version as job output
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
