@@ -46,6 +46,5 @@ jobs:
         with:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/maven-try:${{ needs.versioning.outputs.version }}
-          secrets: |
-            "version"=${{ needs.versioning.outputs.version }}
+          version: "${{ needs.versioning.outputs.version }}"
 

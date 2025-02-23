@@ -6,7 +6,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 # Build the application using Maven
-RUN mvn versions:set -DnewVersion=$version
+RUN mvn versions:set -DnewVersion=$INPUT_VERSION
 RUN mvn clean package -Dskiptests
 # Use an official OpenJDK image as the base image
 FROM openjdk:17-slim
