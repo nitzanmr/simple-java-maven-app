@@ -43,4 +43,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags:  ${{ vars.DOCKERHUB_USERNAME }}/maven-try:$needs.versioning.steps.calculate-version.outputs.version-string 
+          tags:  ${{ vars.DOCKERHUB_USERNAME }}/maven-try:${{ needs.versioning.steps.calculate-version.outputs.version-string }}
