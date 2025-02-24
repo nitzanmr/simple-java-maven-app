@@ -60,7 +60,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} '
             sudo apt update
             sudo apt install docker.io
-            sudo docker run nitzanm594/maven-try:${{ need.versioning.outputs.version }}
+            sudo docker run nitzanm594/maven-try:${{ needs.versioning.outputs.version }}
             '
 
 
