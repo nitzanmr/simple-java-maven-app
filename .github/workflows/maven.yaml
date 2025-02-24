@@ -56,10 +56,8 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           HOSTNAME: ${{ secrets.SSH_HOST }}
           USER_NAME: ${{ secrets.USER_NAME }}
-
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} '
             sudo apt update
             sudo apt install docker.io
             sudo docker run nitzanm594/maven-try:${{ need.versioning.outputs.version }}
